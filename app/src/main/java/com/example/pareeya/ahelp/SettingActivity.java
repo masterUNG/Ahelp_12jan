@@ -3,6 +3,7 @@ package com.example.pareeya.ahelp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
@@ -74,6 +75,16 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
         //Image Controller
+        imageController();
+
+
+        //RadioGroup Controller
+        radioController();
+
+
+    }//Main Method
+
+    private void imageController() {
         addPhone1ImageView.setOnClickListener(SettingActivity.this);
         addPhone2ImageView.setOnClickListener(SettingActivity.this);
         addPhone3ImageView.setOnClickListener(SettingActivity.this);
@@ -84,12 +95,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         deletePhone3ImageView.setOnClickListener(SettingActivity.this);
         deletePhone4ImageView.setOnClickListener(SettingActivity.this);
         deletePhone5ImageView.setOnClickListener(SettingActivity.this);
-
-        //RadioGroup Controller
-        radioController();
-
-
-    }//Main Method
+    }
 
     private void showListFriend() {
 
@@ -448,7 +454,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     }//bindWidget
 
     public void clickSetting(View view) {
-        //startActivity(new Intent(SettingActivity.this,HomeActivity.class));
 
         Log.d("8decV1", "กดยืนยัน");
 
@@ -496,9 +501,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         Log.d("8DecV1", "idCallArrayList ==>" + idCallStringsArrayList);
         Log.d("8DecV1", "myPhoneArrayList ==>" + myPhoneStringArrayList);
 
+
+
         SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
                 MODE_PRIVATE, null);
-        sqLiteDatabase.delete(MyManage.table_phone, null, null);
+
+        //sqLiteDatabase.delete(MyManage.table_phone, null, null);
 
         MyManage myManage = new MyManage(SettingActivity.this);
         for (int i = 0; i < idCallStringsArrayList.size(); i++) {
@@ -509,6 +517,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         }//for
 
+        Intent intent = new Intent(SettingActivity.this, HomeActivity.class);
+        startActivity(intent);
         finish();
 
 
